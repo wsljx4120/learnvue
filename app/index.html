@@ -9,7 +9,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -22,7 +21,7 @@
     <![endif]-->
 
 
-    <div class="hero-unit">
+    <!-- <div class="hero-unit">
       <h1>'Allo, 'Allo!</h1>
       <p>You now have</p>
       <ul>
@@ -30,11 +29,44 @@
 
 
       </ul>
+    </div> -->
+    <div id="demo">
+      <h1>Latest Vue.js Commits</h1>
+      <template v-repeat="b:branches">
+        <input type="radio"
+          name="branch"
+          id="{{*b}}"
+          value="{{*b}}"
+          v-model="currentBranch">
+        <label for="{{*b}}">{{*b}}</label>
+      </template>
+      <p>yyx990803/vue@{{currentBranch}}</p>
+      <ul>
+        <li v-repeat="commits">
+          <a href="{{html_url}}" target="_blank" class="commit">{{sha.slice(0, 7)}}</a>
+          - <span class="message">{{commit.message | truncate}}</span><br>
+          by <span class="author">{{commit.author.name}}</span>
+          at <span class="date">{{commit.author.date | formatDate}}</span>
+        </li>
+      </ul>
+      <div id="test">
+        <p>{{message | reverse | uppercase}}</p>
+        <input v-model="message">
+      </div>
+      <button v-disable="disabled">
+          {{disabled ? 'Disabled' : 'Submit'}}
+      </button>
+      <h1>{{n}}</h1>
+      <button v-on="click: n++">click me</button>
+      <input v-on="keyup: onClick | key enter">
     </div>
+    
 
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/vue/dist/vue.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
